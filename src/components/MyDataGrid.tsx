@@ -1,11 +1,31 @@
 import React from 'react';
 import {
   DataGrid,
+  GridCellParams,
   GridColDef,
+  GridColumnHeaderParams,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
+import clsx from 'clsx';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@material-ui/core';
 
 export const MyDataGrid = () => {
+  const theme = useTheme();
+
+  const useStyles = makeStyles({
+    root: {
+      '& .cell.evenCell': {
+        backgroundColor: theme.palette.background.default,
+      },
+      '& .cell.oddCell': {
+        backgroundColor: '#eeeff6',
+      },
+    },
+  });
+
+  const classes = useStyles();
+
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
@@ -26,6 +46,16 @@ export const MyDataGrid = () => {
       type: 'number',
       width: 210,
       editable: true,
+      align: 'center',
+      renderHeader: (params: GridColumnHeaderParams) => {
+        return <strong>{params.field}🎂</strong>;
+      },
+      cellClassName: (params: GridCellParams) => {
+        return clsx('cell', {
+          evenCell: +params.id % 2 === 0,
+          oddCell: +params.id % 2 !== 0,
+        });
+      },
       valueFormatter: (params: GridValueFormatterParams) => {
         if (!params.value) return '-';
         const valueFormatted = 2021 - Number(params.value);
@@ -51,7 +81,10 @@ export const MyDataGrid = () => {
   
 
   return (
-    <div style={{ height: 400, width: '90%', margin: 'auto' }}>
+    <div
+      style={{ height: 400, width: '90%', margin: 'auto' }}
+      className={classes.root}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
