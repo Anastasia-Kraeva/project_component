@@ -81,8 +81,6 @@ export const MyDataGrid = () => {
 
   const [pageSize, setPageSize] = React.useState<number>(5);
 
-  
-
   return (
     <div
       style={{ height: 400, width: '90%', margin: 'auto' }}
@@ -99,6 +97,9 @@ export const MyDataGrid = () => {
         components={{
           Toolbar: GridToolbar,
         }}
+        isCellEditable={(params) =>
+          params.row.id % 2 === 0 && params.field === 'age'
+        }
       />
     </div>
   );
