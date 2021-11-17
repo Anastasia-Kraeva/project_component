@@ -5,6 +5,7 @@ import {
   GridColDef,
   GridColumnHeaderParams,
   GridValueFormatterParams,
+  GridToolbar,
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
@@ -88,11 +89,16 @@ export const MyDataGrid = () => {
       className={classes.root}
     >
       <DataGrid
+        disableColumnMenu
+        disableColumnSelector
         rows={rows}
         columns={columns}
         pageSize={pageSize}
         rowsPerPageOptions={[5, 10]}
         onPageSizeChange={(newVal) => setPageSize(newVal)}
+        components={{
+          Toolbar: GridToolbar,
+        }}
       />
     </div>
   );
