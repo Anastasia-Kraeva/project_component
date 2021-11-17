@@ -39,6 +39,8 @@ export const MyDataGrid = () => {
       headerName: 'Last name',
       width: 150,
       editable: true,
+      type: 'singleSelect',
+      valueOptions: ['1', '2'],
     },
     {
       field: 'age',

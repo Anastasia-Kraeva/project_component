@@ -1,6 +1,5 @@
 import React from "react";
 import { MyDataGrid } from "./components/MyDataGrid"
-import 'antd/dist/antd.css';
 
 function App() {
 
