@@ -94,9 +94,6 @@ export const MyDataGrid = () => {
         components={{
           Toolbar: GridToolbar,
         }}
-        isCellEditable={(params) =>
-          params.row.id % 2 === 0 && params.field === 'age'
-        }
       />
     </div>
   );
