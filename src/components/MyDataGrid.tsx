@@ -59,7 +59,7 @@ export const MyDataGrid = () => {
       valueFormatter: (params: GridValueFormatterParams) => {
         if (!params.value) return '-';
         const valueFormatted = 2021 - Number(params.value);
-        return `год рождения ${valueFormatted} (${params.value} лет)`;
+        return `${params.value} (${valueFormatted} г.)`;
       },
     },
   ];
