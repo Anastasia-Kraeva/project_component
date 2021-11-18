@@ -9,15 +9,12 @@ import {
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
-import { useTheme } from '@material-ui/core';
 
 export const MyDataGrid = () => {
-  const theme = useTheme();
-
   const useStyles = makeStyles({
     root: {
       '& .cell.evenCell': {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: '#fff', //***почему makeStyles не получает тему, даже если ожидать входные данные
       },
       '& .cell.oddCell': {
         backgroundColor: '#eeeff6',
