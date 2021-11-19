@@ -6,6 +6,9 @@ import {
   GridColumnHeaderParams,
   GridValueFormatterParams,
   GridToolbar,
+  GridValueGetterParams,
+  GridSortModel,
+  GridSortDirection,
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
@@ -39,6 +42,21 @@ export const MyDataGrid = () => {
       editable: true,
       type: 'singleSelect',
       valueOptions: ['1', '2'],
+    },
+    {
+      field: 'userData',
+      width: 150,
+      valueGetter: (params: GridValueGetterParams) => {
+        return `${params.getValue(params.id, 'firstName') || 'noName'} - ${
+          params.getValue(params.id, 'age') || 'noAge'
+        }`;
+      },
+      sortComparator: (v1, v2, param1, param2) => {
+        return (
+          (param1.api.getCellValue(param1.id, 'age') as number) -
+          (param2.api.getCellValue(param2.id, 'age') as number)
+        );
+      },
     },
     {
       field: 'age',
@@ -78,13 +96,19 @@ export const MyDataGrid = () => {
 
   const [pageSize, setPageSize] = React.useState<number>(5);
 
+  const [sortModel, setSortModel] = React.useState<GridSortModel>([
+    {
+      field: 'userData',
+      sort: 'asc' as GridSortDirection,
+    },
+  ]);
+
   return (
     <div
       style={{ height: 400, width: '90%', margin: 'auto' }}
       className={classes.root}
     >
       <DataGrid
-        disableColumnMenu
         disableColumnSelector
         rows={rows}
         columns={columns}
@@ -94,6 +118,8 @@ export const MyDataGrid = () => {
         components={{
           Toolbar: GridToolbar,
         }}
+        sortModel={sortModel}
+        onSortModelChange={(model) => setSortModel(model)}
       />
     </div>
   );
