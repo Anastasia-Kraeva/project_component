@@ -5,29 +5,14 @@ import {
   GridColDef,
   GridColumnHeaderParams,
   GridValueFormatterParams,
-  GridToolbar,
   GridValueGetterParams,
   GridSortModel,
   GridSortDirection,
-  useGridApiContext,
-  useGridState,
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
-import { Pagination } from '@mui/material';
-
-const CustomPagination = () => {
-  const apiRef = useGridApiContext();
-  const [state] = useGridState(apiRef);
-
-  return (
-    <Pagination
-      count={state.pagination.pageCount}
-      page={state.pagination.page + 1}
-      onChange={(e, value) => apiRef.current.setPage(value - 1)}
-    />
-  );
-};
+import { CustomGridColumnMenu } from './CustomGridColumnMenu';
+import { CustomPagination } from './CustomPagination';
 
 export const MyDataGrid = () => {
   const useStyles = makeStyles({
@@ -132,7 +117,7 @@ export const MyDataGrid = () => {
         rowsPerPageOptions={[5, 10]}
         onPageSizeChange={(newVal) => setPageSize(newVal)}
         components={{
-          Toolbar: GridToolbar,
+          Toolbar: CustomGridColumnMenu,
           Pagination: CustomPagination,
         }}
         sortModel={sortModel}
