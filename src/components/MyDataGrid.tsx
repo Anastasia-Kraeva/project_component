@@ -14,7 +14,17 @@ import { makeStyles } from '@mui/styles';
 import { CustomGridColumnMenu } from './CustomGridColumnMenu';
 import { CustomPagination } from './CustomPagination';
 
-export const MyDataGrid = () => {
+/** The component is a table
+ * @remarks
+ * Used elements of MUI:
+ * - {@link [DataGrid](https://mui.com/api/data-grid/data-grid)}
+ * Also used сomponents:
+ * - CustomGridColumnMenu
+ * - CustomPagination
+ * @returns JSX.Element
+ */
+
+export const MyDataGrid: React.FC = (): JSX.Element => {
   const useStyles = makeStyles({
     root: {
       '& .cell.evenCell': {

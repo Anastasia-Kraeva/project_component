@@ -9,7 +9,18 @@ import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import GradeIcon from '@mui/icons-material/Grade';
 import { Box } from '@mui/system';
 
-export const CustomGridColumnMenu = () => {
+/**The component is a Toolbar for MyDataGrid.
+ * Сontains table header and buttons for interactions with the table.
+ * @remarks
+ * Used MUI components:
+ * - GridToolbarContainer
+ * - {@link [Box]:(https://mui.com/system/box)}
+ * - {@link [Typography]:(https://mui.com/api/typography)}
+ * - {@link [IconButton]:(https://mui.com/api/icon-button)}
+ * @returns JSX.Element
+ */
+
+export const CustomGridColumnMenu: React.FC = (): JSX.Element => {
   const apiRef = useGridApiContext();
   const [isShowGradeIcon, setIsShowGradeIcon] = React.useState<boolean>(false);
 
