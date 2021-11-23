@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   DataGrid,
-  GridCellParams,
   GridColDef,
   GridColumnHeaderParams,
   GridValueFormatterParams,
@@ -9,6 +8,7 @@ import {
   GridSortModel,
   GridSortDirection,
   ruRU,
+  GridRowParams,
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
@@ -28,10 +28,7 @@ import { CustomPagination } from './CustomPagination';
 export const MyDataGrid: React.FC = (): JSX.Element => {
   const useStyles = makeStyles({
     root: {
-      '& .cell.evenCell': {
-        backgroundColor: '#fff', //***почему makeStyles не получает тему, даже если ожидать входные данные
-      },
-      '& .cell.oddCell': {
+      '& .row.evenRow': {
         backgroundColor: '#eeeff6',
       },
     },
@@ -79,12 +76,6 @@ export const MyDataGrid: React.FC = (): JSX.Element => {
       align: 'center',
       renderHeader: (params: GridColumnHeaderParams) => {
         return <strong>{params.field}🎂</strong>;
-      },
-      cellClassName: (params: GridCellParams) => {
-        return clsx('cell', {
-          evenCell: +params.id % 2 === 0,
-          oddCell: +params.id % 2 !== 0,
-        });
       },
       valueFormatter: (params: GridValueFormatterParams) => {
         if (!params.value) return '-';
@@ -134,6 +125,11 @@ export const MyDataGrid: React.FC = (): JSX.Element => {
         sortModel={sortModel}
         onSortModelChange={(model) => setSortModel(model)}
         localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
+        getRowClassName={(params: GridRowParams<{ [key: string]: any }>) => {
+          return clsx('row', {
+            evenRow: +params.id % 2 === 0,
+          });
+        }}
       />
     </div>
   );
