@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   DataGrid,
   GridCellParams,
@@ -8,6 +8,7 @@ import {
   GridValueGetterParams,
   GridSortModel,
   GridSortDirection,
+  ruRU,
 } from '@mui/x-data-grid';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
@@ -132,6 +133,7 @@ export const MyDataGrid: React.FC = (): JSX.Element => {
         }}
         sortModel={sortModel}
         onSortModelChange={(model) => setSortModel(model)}
+        localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
       />
     </div>
   );
